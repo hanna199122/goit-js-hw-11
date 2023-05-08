@@ -17,7 +17,12 @@ let page = 1;
 let data;
 let query;
 
-btnLoadMore.addEventListener('click', onLoadMoreImages);
+let galleryLightbox = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionDelay: 250,
+});
+
+btnLoadMore.addEventListener('click', onLoadMoreButton);
 searchForm.addEventListener('submit', onSerchImages);
 
 async function fetchImages(querySearch) {
@@ -47,26 +52,26 @@ async function fetchImages(querySearch) {
 
 async function onSerchImages(evt) {
   evt.preventDefault();
-  query = evt.target.elements[0].value;
-  btnLoadMore.style = 'display:block';
+  query = evt.target.elements[0].value.trim();
 
-  if (query !== '') {
-    fetchImages(query)
-      .then(res => {
-        createMarkup(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  } else {
+  if (!query) {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
     btnLoadMore.style = 'display:none';
+    return;
   }
+  fetchImages(query)
+    .then(res => {
+      createMarkup(res);
+      btnLoadMore.style = 'display:block';
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
 
-function onLoadMoreImages() {
+function onLoadMoreButton() {
   page += 1;
   fetchImages(query).then(res => {
     createMarkup(res);
@@ -74,29 +79,19 @@ function onLoadMoreImages() {
 }
 
 function createMarkup(res) {
-  if (res) {
-    const images = res.hits;
-
-    console.log(images);
-    if (images.length === 0) {
-      gallery.innerHTML = '';
-      Notiflix.Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
-      );
-    }
-    btnLoadMore.style = 'display:none';
-    const markup = images
-      .map(
-        ({
-          webformatURL,
-          largeImageURL,
-          tags,
-          likes,
-          views,
-          comments,
-          downloads,
-        }) => {
-          return `<div class="photo-card">
+  const images = res.hits;
+  const markup = images
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => {
+        return `<div class="photo-card">
               <a class="gallery-link" href="${largeImageURL}">
                 <img src="${webformatURL}" alt="${tags}" loading="lazy" />
               </a>
@@ -115,23 +110,13 @@ function createMarkup(res) {
             </p>
           </div>
         </div>`;
-        }
-      )
-      .join();
+      }
+    )
+    .join('');
 
-    gallery.innerHTML = markup;
-    Notiflix.Notify.success('Hooray! We found totalHits images.');
-
-    let galleryLightbox = new SimpleLightbox('.gallery a', {
-      captions: true,
-      captionDelay: 250,
-    });
-  } else {
-    Notiflix.Notify.warning(
-      "We're sorry, but you've reached the end of search results."
-    );
-    btnLoadMore.style = 'display:none';
-  }
+  gallery.insertAdjacentHTML('beforeend', markup);
+  galleryLightbox.refresh();
+  Notiflix.Notify.success('Hooray! We found totalHits images.');
 }
 
 // function loadMoreResults(){}

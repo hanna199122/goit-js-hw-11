@@ -11,7 +11,18 @@ body {
   color: #212121;
   line-height: 1.5;
 }
+.header {
+  background-color: cadetblue;
+}
 
+form button {
+  background-color: darkorange;
+  font-size: medium;
+}
+
+form input {
+  font-size: medium;
+}
 .conteiner {
   width: 1200px;
   padding: 0px 15px;
@@ -33,8 +44,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
-  margin-top: 30px;
+  padding: 30px;
 }
 img {
   object-fit: cover;
