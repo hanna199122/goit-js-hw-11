@@ -48,13 +48,20 @@ form input {
 }
 img {
   object-fit: cover;
-  width: 100%;
+  width: auto;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 100%;
   display: block;
 }
 
 .gallery {
   gap: 30px;
   margin-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 0 15px;
 }
 .info {
   display: flex;
@@ -63,19 +70,7 @@ img {
 
 .photo-card {
   display: flex;
-  flex-basis: calc((80% - 20px) / 4);
+  width: calc((100% - 45px) / 4);
   border-radius: 0px 0px 4px 4px;
   background-color: white;
-
-  margin-top: 30px;
-  margin-left: 30px;
-}
-
-.gallery-link {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 0;
 }
