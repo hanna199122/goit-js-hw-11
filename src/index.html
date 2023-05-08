@@ -7,40 +7,45 @@
     <title>Homework 11</title>
   </head>
   <body>
-    <form class="search-form" id="search-form">
-      <input
-        type="text"
-        name="searchQuery"
-        autocomplete="off"
-        placeholder="Search images..."
-      />
-      <button type="submit">Search</button>
-    </form>
-    <div class="gallery">
-      <!-- Картки зображень -->
+    <div class="conteiner">
+      <form class="search-form" id="search-form">
+        <input
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search images..."
+        />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <div class="conteiner">
+      <div class="gallery">
+        <!-- Картки зображень -->
+      </div>
     </div>
 
-    <button type="button" class="load-more">Load more</button>
-
     <!-- 
-    <div class="photo-card">
-        <img src="" alt="" loading="lazy" />
+    ` <div class="photo-card">
+          <a class="gallery-link" href="${largeImageURL}">
+            <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+          </a>
+  
         <div class="info">
-          <p class="info-item">
-            <b>Likes</b>
-          </p>
-          <p class="info-item">
-            <b>Views</b>
-          </p>
-          <p class="info-item">
-            <b>Comments</b>
-          </p>
-          <p class="info-item">
-            <b>Downloads</b>
-          </p>
-        </div>
-      </div> -->
-
+        <p class="info-item">
+          <b>Likes: </b>${likes}</b>
+        </p>
+        <p class="info-item">
+          <b>Views: </b>${views}</b>
+        </p>
+        <p class="info-item">
+          <b>Comments: </b>${comments}</b>
+        </p>
+        <p class="info-item">
+          <b>Downloads: </b>${downloads}</b>
+        </p>
+      </div>
+    </div>`; -->
+    <button type="button" class="load-more">Load more</button>
     <script src="./index.js" type="module"></script>
   </body>
 </html>
