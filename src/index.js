@@ -8,7 +8,7 @@ let throttle = require('lodash.throttle');
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
 const btnLoadMore = document.querySelector('.load-more');
-window.addEventListener('scroll', throttle(loadMoreResults, 1000));
+// window.addEventListener('scroll', throttle(loadMoreResults, 1000));
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '36122923-4c7f71e9d9d6e85a0cc171286';
@@ -100,7 +100,6 @@ function createMarkup(res) {
               <a class="gallery-link" href="${largeImageURL}">
                 <img src="${webformatURL}" alt="${tags}" loading="lazy" />
               </a>
-      
             <div class="info">
             <p class="info-item">
               <b>Likes:</b>${likes}</b>
