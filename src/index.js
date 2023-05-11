@@ -57,6 +57,7 @@ async function fetchImages(querySearch) {
 async function onSerchImages(evt) {
   evt.preventDefault();
   gallery.innerHTML = '';
+  page = 1;
   query = evt.target.elements[0].value.trim();
 
   if (!query) {
@@ -146,5 +147,3 @@ function createMarkup(res) {
   gallery.insertAdjacentHTML('beforeend', markup);
   galleryLightbox.refresh();
 }
-
-// function loadMoreResults(){}
